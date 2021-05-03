@@ -2,8 +2,6 @@
 
 The practice of ultimate Three.js course by [Bruno Simon](https://bruno-simon.com).
 
-Learn in [https://threejs-journey.xyz](https://threejs-journey.xyz)
-
 ### Basics
 
 Create your first scene and understand fundamentals like cameras, geometries, materials, textures.
