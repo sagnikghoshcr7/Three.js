@@ -2,10 +2,19 @@ import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import gsap from 'gsap'
+import * as dat from 'dat.gui'
 
 /**
  * Base
  */
+const parameters = {
+    color: 0xff0000,
+    spin: () =>
+    {
+        gsap.to(mesh.rotation, 1, { y: mesh.rotation.y + Math.PI * 2 })
+    }
+}
+
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -63,6 +72,27 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+/**
+ * Debug
+ */
+const gui = new dat.GUI({
+    // closed: true,
+    width: 400
+})
+// gui.hide()
+gui.add(mesh.position, 'y').min(- 3).max(3).step(0.01).name('elevation')
+gui.add(mesh, 'visible')
+gui.add(material, 'wireframe')
+
+gui
+    .addColor(parameters, 'color')
+    .onChange(() =>
+    {
+        material.color.set(parameters.color)
+    })
+
+gui.add(parameters, 'spin')
 
 /**
  * Animate
